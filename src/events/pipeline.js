@@ -10,17 +10,24 @@ class Event {
 			let project = body.project.name;
 
 			embed.title = 'Pipeline for ' + project + ' #' + id + ' changed to ' + status;
+			if (status === 'pending')
+				embed.color = 0xfef79b;
 			if (status === 'success')
-				embed.color = 0x46a049;
-			if (status === 'success')
-				embed.color = 0x46a049;
+				embed.color = 0x8dc740;
+			if (status === 'running')
+				embed.color = 0x00b0ad;
+			if (status === 'canceled')
+				embed.color = 0xee937e;
+			if (status === 'failed')
+				embed.color = 0xc22854;
 			embed.url = body.commit.url + '/pipeline';
 
 			embed.author = discord.create_author_obj(body.user.name, body.user.avatar_url);
 
 			embed.fields = [];
 			let builds = body.builds;
-			builds.reverse()
+			builds.sort((a, b)=>a.id>=b.id)
+
 			for (let build of builds) {
 				let shorthand = build.id;
 				let message = build.stage + ' ' + build.status;
