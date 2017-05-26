@@ -3,7 +3,8 @@ class EventHandler {
 		this.formatters = {
 			'push': new (require('./events/push'))(),
 			'issue': new (require('./events/issue'))(),
-			'note': new (require('./events/note'))()
+			'note': new (require('./events/note'))(),
+			'pipeline': new (require('./events/pipeline'))()
 		};
 	}
 

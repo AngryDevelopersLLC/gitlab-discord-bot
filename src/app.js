@@ -16,3 +16,4 @@ app.use('/api/v1', router);
 app.listen(config.server.port, function() {
 	winston.info('Listening on localhost:' + config.server.port);
 });
+

@@ -44,8 +44,7 @@ router.post('/webhook/:name', function (req, res) {
 	// Create message send post webhook
 	handler.createMessage(req.body).then(function(message) {
 		res.status(202).send();
-
-		executor.execute(message, webhook);
+        executor.execute(message, webhook);
 	}).catch(function(err) {
 		winston.error('Unexpected error processing event', err);
 

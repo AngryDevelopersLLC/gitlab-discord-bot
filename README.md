@@ -3,6 +3,31 @@ gitlab-discord-bot
 
 A tiny GitLab notification bridge for Discord, written in NodeJS.
 
+Proxy events:
+
+* issue
+* note
+* push
+* pipeline
+
+| Event                     | type          | support   |
+| ------------------------- | ------------- |:---------:|
+| Push events               | push          |      +    |
+| Tag events                | tag_push      |      -    |
+| Issues events             | issue         |      +    |
+| Comment on commit         | note          |      +    |
+| Comment on merge request  | note          |      +    |
+| Comment on issue          | note          |      +    |
+| Comment on code snippet   | note          |      +    |
+| Merge request events      | merge_request |      -    |
+| Wiki Page events          | wiki_page     |      -    |
+| Pipeline events           | pipeline      |      -    |
+| Build events              | build         |      -    |
+
+
+
+
+
 ## Installation
 Currently, the only installation method is to clone the Git repository to your target server and install the dependencies with `npm install`. In the future, packaged releases may be made available.
 
