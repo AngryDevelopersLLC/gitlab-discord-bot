@@ -3,12 +3,7 @@ gitlab-discord-bot
 
 A tiny GitLab notification bridge for Discord, written in NodeJS.
 
-Proxy events:
-
-* issue
-* note
-* push
-* pipeline
+[List of events](https://docs.gitlab.com/ce/user/project/integrations/webhooks.html)
 
 | Event                     | type          | support   |
 | ------------------------- | ------------- |:---------:|
@@ -21,10 +16,8 @@ Proxy events:
 | Comment on code snippet   | note          |      +    |
 | Merge request events      | merge_request |      -    |
 | Wiki Page events          | wiki_page     |      -    |
-| Pipeline events           | pipeline      |    -/+    |
+| Pipeline events           | pipeline      |      +    |
 | Build events              | build         |      -    |
-
-
 
 
 

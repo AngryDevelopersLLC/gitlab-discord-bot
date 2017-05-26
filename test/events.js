@@ -36,6 +36,17 @@ describe('Books', () => {
                 });
         });
     });
+    describe('pipeline_events', () => {
+        it('it should GET all the books', (done) => {
+            chai.request('http://localhost:8080')
+                .post('/api/v1/webhook/test')
+                .set('x-gitlab-token', 'change_me')
+                .send(examples.build_events)
+                .end((err, res) => {
+                    done();
+                });
+        });
+    });
 
 });
 

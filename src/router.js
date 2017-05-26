@@ -1,6 +1,6 @@
 const winston = require('winston');
 winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {'timestamp':true});
+winston.add(winston.transports.Console, {'timestamp':true, level: 'debug'});
 const app = require('./app.js');
 const handler = new (require('./handler'))(app);
 const executor = new (require('./executor'))(app);
@@ -36,12 +36,12 @@ router.post('/webhook/:name', function (req, res) {
 	}
 
 	if (!handler.isEventSupported(req.body)) {
+        winston.error('Event type not supported' + JSON.stringify(req.body));
 		return res.status(501).json({
 			error: 'Unsupported',
 			details: 'Event type not supported'
 		});
 	}
-
 	// Create message send post webhook
 	handler.createMessage(req.body).then(function(message) {
 		res.status(202).send();
