@@ -14,8 +14,8 @@ class EventHandler {
 
 	createMessage(body) {
 		return new Promise((resolve, reject) => {
-			var type = body.object_kind;
-			var formatter = this.formatters[type];
+			let type = body.object_kind;
+			let formatter = this.formatters[type];
 
 			if (formatter == null) {
 				return reject({

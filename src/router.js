@@ -1,5 +1,6 @@
 const winston = require('winston');
-
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {'timestamp':true});
 const app = require('./app.js');
 const handler = new (require('./handler'))(app);
 const executor = new (require('./executor'))(app);
@@ -8,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/webhook/:name', function (req, res) {
-	var token = req.headers['x-gitlab-token'];
+	let token = req.headers['x-gitlab-token'];
 
 	if (token != app.config.authentication.secret) {
 		return res.status(403).json({
@@ -16,7 +17,7 @@ router.post('/webhook/:name', function (req, res) {
 		});
 	}
 
-	var name = req.params.name;
+	let name = req.params.name;
 
 	if (!name || name.length <= 0) {
 		return res.status(400).json({
@@ -25,7 +26,7 @@ router.post('/webhook/:name', function (req, res) {
 		});
 	}
 
-	var webhook = executor.getWebhook(name);
+	let webhook = executor.getWebhook(name);
 
 	if (webhook == null) {
 		return res.status(400).json({

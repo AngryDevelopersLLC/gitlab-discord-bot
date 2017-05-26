@@ -25,9 +25,9 @@ const ACTIONS = {
 class Event {
 	format(body) {
 		return new Promise(function(resolve) {
-			var embed = {};
-			var attributes = body.object_attributes;
-			var action = ACTIONS[attributes.action];
+			let embed = {};
+			let attributes = body.object_attributes;
+			let action = ACTIONS[attributes.action];
 
 			embed.title = util.format('%s issue `#%d`', action.verb, attributes.iid);
 			embed.url = attributes.url;

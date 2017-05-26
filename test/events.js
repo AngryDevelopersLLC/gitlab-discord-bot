@@ -7,7 +7,6 @@ process.env.NODE_ENV = 'test';
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 //let server = require('../src/app.js');
-let sleep = require('sleep');
 let examples = require('./examples');
 let should = chai.should();
 

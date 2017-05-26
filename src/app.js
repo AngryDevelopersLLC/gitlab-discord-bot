@@ -1,4 +1,6 @@
 const winston = require('winston');
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {'timestamp':true});
 winston.info('Starting bridge');
 
 const express = require('express');
@@ -9,7 +11,7 @@ exports.config = config;
 
 const router = require('./router');
 
-var app = express();
+let app = express();
 app.use(bodyParser.json());
 app.use('/api/v1', router);
 

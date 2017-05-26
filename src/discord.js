@@ -6,7 +6,7 @@ const UPDATE_PARAMETER_NAME = '?CACHEFIX';
 // it will never be updated in the client. This sets a unique timestamp to each URL that shouldn't
 // break things, and force the Discord client to update. This assumes the avatar server is linient.
 exports.create_author_obj = function(name, icon_url) {
-	var timestamp = Math.floor(new Date().getTime() / UPDATE_INTERVAL);
+	let timestamp = Math.floor(new Date().getTime() / UPDATE_INTERVAL);
 
 	return {
 		name: name,

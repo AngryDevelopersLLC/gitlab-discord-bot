@@ -5,18 +5,18 @@ const discord = require('../discord');
 class Event {
 	format(body) {
 		return new Promise(function(resolve) {
-			var embed = {};
+			let embed = {};
 
-			var type = body.object_attributes.noteable_type;
-			var where = '`???`';
+			let type = body.object_attributes.noteable_type;
+			let where = '`???`';
 
-			if (type == 'Commit') {
+			if (type === 'Commit') {
 				where = util.format('commit `%s`', body.commit.substring(0, 8));
-			} else if (type == 'Issue') {
+			} else if (type === 'Issue') {
 				where = util.format('issue `#%s`', body.issue.iid);
-			} else if (type == 'MergeRequest') {
+			} else if (type === 'MergeRequest') {
 				where = util.format('merge request `!%s`', body.merge_request.iid);
-			} else if (type == 'Snippet') {
+			} else if (type === 'Snippet') {
 				where = util.format('snippet `$%s`', body.snippet.id);
 			}
 

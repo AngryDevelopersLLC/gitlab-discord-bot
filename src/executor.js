@@ -1,4 +1,6 @@
 const winston = require('winston');
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {'timestamp':true});
 const unirest = require('unirest');
 
 class HookExecutor {
@@ -14,7 +16,7 @@ class HookExecutor {
 	}
 
 	execute(payload, url) {
-		var queue = this.queues[url];
+		let queue = this.queues[url];
 		if (!queue) { this.queues[url] = queue = new Queue(url); }
 
 		queue.submit({
@@ -47,8 +49,8 @@ class Queue {
 		if (this.is_busy || this.queue.length <= 0) return;
 		this.is_busy = true;
 
-		var task = this.queue.shift();
-		var start = new Date().getTime();
+		let task = this.queue.shift();
+		let start = new Date().getTime();
 
 		winston.debug('Sending Discord message #' + task.id);
 
@@ -69,10 +71,10 @@ class Queue {
 						});
 					}
 
-					var remote_reset = response.headers['x-ratelimit-reset'] * 1000;
-					var remote_capacity = response.headers['x-ratelimit-remaining'];
+					let remote_reset = response.headers['x-ratelimit-reset'] * 1000;
+					let remote_capacity = response.headers['x-ratelimit-remaining'];
 
-					var pause = (remote_reset + 250) - new Date().getTime();
+					let pause = (remote_reset + 250) - new Date().getTime();
 
 					if (remote_capacity <= 0 && pause > 20) {
 						winston.warn('Webhook executor is busy! Can send again in ' + pause + 'ms...');

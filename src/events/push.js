@@ -6,7 +6,7 @@ const discord = require('../discord');
 class Formatter {
 	format(body) {
 		return new Promise(function(resolve) {
-			var embed = {};
+			let embed = {};
 
 			embed.title = body.commits.length > 1 ?
 				'Pushed ' + body.commits.length + ' commits' : 'Pushed a commit';
@@ -19,10 +19,10 @@ class Formatter {
 
 			embed.fields = [];
 
-			for (var commit of body.commits) {
-				var shorthand = commit.id.substring(0, 8);
-				var message = commit.message.split('\n');
-				var description = util.format('- **%s**', commit.author.name);
+			for (let commit of body.commits) {
+				let shorthand = commit.id.substring(0, 8);
+				let message = commit.message.split('\n');
+				let description = util.format('- **%s**', commit.author.name);
 
 				if (message.length > 1) {
 					description = message.slice(1, message.length).join('\n') + '\n' + description;
