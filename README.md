@@ -21,7 +21,7 @@ Proxy events:
 | Comment on code snippet   | note          |      +    |
 | Merge request events      | merge_request |      -    |
 | Wiki Page events          | wiki_page     |      -    |
-| Pipeline events           | pipeline      |      -    |
+| Pipeline events           | pipeline      |    -/+    |
 | Build events              | build         |      -    |
 
 
