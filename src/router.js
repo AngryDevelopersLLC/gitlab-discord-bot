@@ -11,7 +11,8 @@ const router = express.Router();
 router.post('/webhook/:name', function (req, res) {
 	let token = req.headers['x-gitlab-token'];
 
-	if (token != app.config.authentication.secret) {
+	if (token !== app.config.authentication.secret) {
+		winston.error('%s != %s', token, app.config.authentication.secret);
 		return res.status(403).json({
 			error: 'Not authenticated'
 		});
@@ -20,6 +21,7 @@ router.post('/webhook/:name', function (req, res) {
 	let name = req.params.name;
 
 	if (!name || name.length <= 0) {
+		winston.error('Missing :name parameter');
 		return res.status(400).json({
 			error: 'Bad request',
 			details: 'Missing :name parameter'
@@ -28,7 +30,8 @@ router.post('/webhook/:name', function (req, res) {
 
 	let webhook = executor.getWebhook(name);
 
-	if (webhook == null) {
+	if (webhook === null) {
+		winston.error('Invalid :name');
 		return res.status(400).json({
 			error: 'Bad request',
 			details: 'Invalid :name'
@@ -36,7 +39,7 @@ router.post('/webhook/:name', function (req, res) {
 	}
 
 	if (!handler.isEventSupported(req.body)) {
-        winston.error('Event type not supported' + JSON.stringify(req.body));
+		winston.error('Event type not supported' + JSON.stringify(req.body));
 		return res.status(501).json({
 			error: 'Unsupported',
 			details: 'Event type not supported'
@@ -45,7 +48,7 @@ router.post('/webhook/:name', function (req, res) {
 	// Create message send post webhook
 	handler.createMessage(req.body).then(function(message) {
 		res.status(202).send();
-        executor.execute(message, webhook);
+		executor.execute(message, webhook);
 	}).catch(function(err) {
 		winston.error('Unexpected error processing event', err);
 
